@@ -34,7 +34,7 @@ for i, layer in enumerate(res_model.layers):
 	print(f"Layer {i} Out: {layer} Trainable: {layer.trainable}")
 
 try:
-	model = tf.keras.models.load_model("transfer_resnet50")
+	model = tf.keras.models.load_model("cvueba")
 	print("Finished Loading Model!")
 except:
 	print("Model not found. Generating and training!")
@@ -61,7 +61,7 @@ except:
 	model.compile(loss='binary_crossentropy', optimizer="adam", metrics=METRICS)
 	model.fit([images, non_behave], y, batch_size=128, epochs=100, shuffle=True)
 
-	model.save("transfer_resnet50")
+	model.save("cvueba")
 
 test_images, test_non_behave, y_test = load_data("TestImages")
 
