@@ -2,6 +2,8 @@ import numpy as np
 import cv2
 import random
 import shutil
+import os
+from tqdm import tqdm
 
 """
 Novel augmentations proposed in the paper.
@@ -31,8 +33,10 @@ def get_user_from_path(path):
 
 def get_random_benign_from_user(user):
 	folder = os.path.join(IN_FOLDER, "0")
-	files = [f for f in os.listdir(mypath) if os.path.isfile(os.path.join(mypath, f))]
-	userfiles - [f for f in files if user in f]
+	files = [f for f in os.listdir(folder) if os.path.isfile(os.path.join(folder, f))]
+	if len(files) == 0:
+		return None
+	userfiles = [f for f in files if user in f]
 	choice_file = random.choice(userfiles)
 	return os.path.join(folder, choice_file)
 
@@ -42,6 +46,8 @@ def channel_replace(path, in_folder, out_folder):
 
 	im_user = get_user_from_path(path)
 	rand_path = get_random_benign_from_user(im_user)
+	if rand_path is None:
+		return
 	rand_im = cv2.imread(rand_path)
 	channel_1 = rand_im[:, :, 0]
 	channel_2 = rand_im[:, :, 1]
@@ -75,11 +81,11 @@ except:
 	pass
 
 # Do not augment benign images. Just copy those over
-shutil.copytree(f"{IN_FOLDER}/0", f"{OUT_FOLDER}/0")
-for scenario in [1, 2, 3]:
+shutil.copytree(f"{IN_FOLDER}/0", f"{OUT_FOLDER}/0", dirs_exist_ok=True)
+for scenario in [0, 1, 2, 3]:
 	directory_path = os.path.join(IN_FOLDER, str(scenario))
 	images = [f for f in os.listdir(directory_path) if os.path.isfile(os.path.join(directory_path, f))]
-	for image in images:
-		path = os.path.join(directory_path, images)
+	for image in tqdm(images):
+		path = os.path.join(directory_path, image)
 		channel_swap(path, IN_FOLDER, OUT_FOLDER)
 		channel_replace(path, IN_FOLDER, OUT_FOLDER)
