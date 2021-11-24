@@ -6,7 +6,6 @@ logging.getLogger('tensorflow').setLevel(logging.FATAL)
 
 import tensorflow as tf
 
-import matplotlib.pyplot
 import math
 import numpy as np
 
