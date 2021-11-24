@@ -22,7 +22,7 @@ to extract data
 ssl._create_default_https_context = ssl._create_unverified_context
 
 print("Loading data...")
-images, non_behave, y = load_data("TrainImages")
+images, non_behave, y = load_data("AugImages")
 y[y != 0] = 1
 
 print("...Done")
