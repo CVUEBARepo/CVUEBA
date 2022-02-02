@@ -1,16 +1,7 @@
-# Computer Vision User Entity Behavior Analytics
-Code repository for "Computer Vision User Entity Behavior Analytics"
-
 ## Code Description
 
 ### dataset.csv
-As discussed in the manuscript, CVUEBA was designed to be utilized in production. Thus, as an extra layer of security, we keep the features used as well as the feature extraction module proprietary. 
-
-We observed that one can obtain similar performance on the CERT Insider Threat dataset using a combination of features introduced by various publications in concert with the features we introduce in the main manuscript.
-
-dataset.csv is a CSV file containing the extracted features for various users for various days in the CERT Insider Threat dataset. For space reasons, we publish a small segment of the original dataset here. Reported instances were chosen by randomly selecting from the set of encoded images used to evaluate CVUEBA and storing unique behavior instances corresponding to the channels of these images.
-
-We did not wish for all of the code to be proprietary, and thus felt this was an acceptable compromise.
+dataset.csv is a CSV file containing the extracted features for various users for various days in the CERT Insider Threat dataset. For space reasons, we publish a small segment of the original dataset here. Reported instances were chosen by randomly selecting from the set of encoded images used to evaluate CVUEBA and storing unique behavior instances.
 
 ## split_dataset.py
 Splits dataset into train, test, and validation sets.
